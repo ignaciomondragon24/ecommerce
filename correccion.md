@@ -1,4 +1,4 @@
-# Muchas gracias por la entrega ignacio, sin embargo hay algunas cosas que estaria dando en cambios:
+# correciones
 
 - [x] No colocar el string de conexion de mongo directamente en el codigo 
 - [x] no hace falta tener la persistencia en otros sistemas, con tener el sistema de mongo esta mas que bien.
