@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "title": "Producto 1",
+    "description": "Descripción del producto 1",
+    "code": "ABC123",
+    "price": 10.99,
+    "status": "available",
+    "stock": 100,
+    "category": "Categoría 1",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Producto 2",
+    "description": "Descripción del producto 2",
+    "code": "DEF456",
+    "price": 20.99,
+    "status": "available",
+    "stock": 200,
+    "category": "Categoría 2",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Producto 3",
+    "description": "Descripción del producto 3",
+    "code": "GHI789",
+    "price": 30.99,
+    "status": "available",
+    "stock": 300,
+    "category": "Categoría 3",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Producto 4",
+    "description": "Descripción del producto 4",
+    "code": "JKL012",
+    "price": 40.99,
+    "status": "available",
+    "stock": 400,
+    "category": "Categoría 4",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "MNO345",
+    "price": 50.99,
+    "status": "available",
+    "stock": 500,
+    "category": "Categoría 5",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Producto 6",
+    "description": "Descripción del producto 6",
+    "code": "PQR678",
+    "price": 60.99,
+    "status": "available",
+    "stock": 600,
+    "category": "Categoría 6",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Producto 7",
+    "description": "Descripción del producto 7",
+    "code": "STU901",
+    "price": 70.99,
+    "status": "available",
+    "stock": 700,
+    "category": "Categoría 7",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Producto 8",
+    "description": "Descripción del producto 8",
+    "code": "VWX234",
+    "price": 80.99,
+    "status": "available",
+    "stock": 800,
+    "category": "Categoría 8",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Producto 9",
+    "description": "Descripción del producto 9",
+    "code": "YZA567",
+    "price": 90.99,
+    "status": "available",
+    "stock": 900,
+    "category": "Categoría 9",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Producto 10",
+    "description": "Descripción del producto 10",
+    "code": "BCD890",
+    "price": 100.99,
+    "status": "available",
+    "stock": 1000,
+    "category": "Categoría 10",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Producto 11",
+    "description": "Descripción del producto 11",
+    "code": "EFG123",
+    "price": 110.99,
+    "status": "available",
+    "stock": 1100,
+    "category": "Categoría 11",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Producto 12",
+    "description": "Descripción del producto 12",
+    "code": "HIJ456",
+    "price": 120.99,
+    "status": "available",
+    "stock": 1200,
+    "category": "Categoría 12",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Producto 13",
+    "description": "Descripción del producto 13",
+    "code": "KLM789",
+    "price": 130.99,
+    "status": "available",
+    "stock": 1300,
+    "category": "Categoría 13",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Producto 14",
+    "description": "Descripción del producto 14",
+    "code": "NOP012",
+    "price": 140.99,
+    "status": "available",
+    "stock": 1400,
+    "category": "Categoría 14",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Producto 15",
+    "description": "Descripción del producto 15",
+    "code": "QRS345",
+    "price": 150.99,
+    "status": "available",
+    "stock": 1500,
+    "category": "Categoría 15",
+    "thumbnails": [
+      "thumbnail1.jpg",
+      "thumbnail2.jpg"
+    ]
+  }
+]

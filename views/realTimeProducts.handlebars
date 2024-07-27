@@ -1,0 +1,89 @@
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Descripción">
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input type="number" class="form-control" id="price" name="price" placeholder="Precio">
+        </div>
+        <div class="form-group">
+            <label for="code">Código</label>
+            <input type="text" class="form-control" id="code" name="code" placeholder="Código">
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
+        </div>
+        <div class="form-group">
+            <label for="category">Categoría</label>
+            <input type="text" class="form-control" id="category" name="category" placeholder="Categoría">
+        </div>
+        <button type="button" class="btn btn-danger" id="submit-button" onclick="agregaProducto()">Agregar
+            Producto</button>
+    </form>
+</div>
+
+<div class="container">
+    <h1 class="text-center">Lista de Productos</h1>
+    <ul class="list-group">
+        {{#each products}}
+        <li class="list-group-item">
+            <h2>{{this.title}}</h2>
+            <p>{{this.description}}</p>
+            <p>Precio: ${{this.price}}</p>
+            <button class="btn btn-danger" onclick="eliminar('{{this.id}}')">Eliminar</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on('connect', function () {
+        console.log('Conectado al servidor');
+    });
+    socket.on('disconnect', function () {
+        console.log('Desconectado del servidor');
+    });
+    socket.on('stock_actualizado', function (product) {
+        // Recargo la pagina
+        console.log('Stock actualizado');
+        location.reload();
+    });
+
+    function agregaProducto() {
+
+        const title = document.querySelector('input[name="title"]').value;
+        const description = document.querySelector('input[name="description"]').value;
+        const price = parseFloat(document.querySelector('input[name="price"]').value);
+        const code = document.querySelector('input[name="code"]').value;
+        const stock = parseInt(document.querySelector('input[name="stock"]').value);
+        const category = document.querySelector('input[name="category"]').value;
+
+        if (!title || !description || !price || !code || !stock || !category) {
+            alert('Todos los campos son obligatorios');
+            return;
+        }
+
+        const product = {
+            title,
+            description,
+            price,
+            code,
+            stock,
+            category
+        };
+        socket.emit('new_product_back', product);
+    }
+
+    function eliminar(id) {
+        socket.emit('delete_product', id);
+    }
+</script>

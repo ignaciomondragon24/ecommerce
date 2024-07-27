@@ -1,0 +1,54 @@
+<!-- Paginación -->
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    {{#if data.prevPage}}
+    <li class="page-item"><a class="page-link" href="{{data.prevLink}}">Anterior</a></li>
+    {{/if}}
+    {{#if data.nextPage}}
+    <li class="page-item"><a class="page-link" href="{{data.nextLink}}">Siguiente</a></li>
+    {{/if}}
+  </ul>
+</nav>
+
+<div class="container">
+    <h1 class="text-center">Lista de Productos</h1>
+    <ul class="list-group">
+        {{#each products}}
+        <li class="list-group-item">
+            <h2>{{this.title}}</h2>
+            <p>{{this.description}}</p>
+            <p>Precio: ${{this.price}}</p>
+            <!-- Enlace a la vista detallada del producto -->
+            <a href="/api/products/detail/{{this.id}}?cid={{../data.cid}}" class="btn btn-primary">Ver detalles</a>
+            <!-- Botón para agregar al carrito directamente -->
+            <button onclick="agregarAlCarrito('{{this.id}}', '{{../data.cid}}')" class="btn btn-success">Agregar al Carrito</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<script>
+function agregarAlCarrito(productId, cid) {
+  fetch(`/api/carts/${cid}/product/${productId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ quantity: 1 }) 
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('No se pudo agregar el producto al carrito');
+  })
+  .then(updatedCart => {
+    console.log('Producto agregado al carrito', updatedCart);
+    
+  })
+  .catch(error => {
+    console.error('Error al agregar el producto al carrito:', error);
+  });
+}
+
+
+</script>

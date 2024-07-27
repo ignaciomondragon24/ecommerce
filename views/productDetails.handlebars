@@ -1,0 +1,38 @@
+
+<div class="container">
+    <h1 class="text-center">{{product.title}}</h1>
+    <div class="list-group">
+        <div class="list-group-item">
+            <h2>{{product.title}}</h2>
+            <p>{{product.description}}</p>
+            <p>Precio: ${{product.price}}</p>
+            <p>Categoría: {{product.category}}</p>
+            <button onclick="agregarAlCarrito('{{product.id}}', '{{cid}}')" class="btn btn-success">Agregar al Carrito</button>
+        </div>
+    </div>
+</div>
+<script>
+ function agregarAlCarrito(productId, cid) {
+  fetch(`/api/carts/${cid}/product/${productId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ quantity: 1 }) 
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('No se pudo agregar el producto al carrito');
+  })
+  .then(updatedCart => {
+    console.log('Producto agregado al carrito', updatedCart);
+    
+  })
+  .catch(error => {
+    console.error('Error al agregar el producto al carrito:', error);
+  });
+}                                                                                                                                                                                                                               
+
+</script>

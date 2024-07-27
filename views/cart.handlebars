@@ -1,0 +1,50 @@
+<!-- Paginación (si es aplicable) -->
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    {{#if data.prevPage}}
+    <li class="page-item"><a class="page-link" href="{{data.prevLink}}">Anterior</a></li>
+    {{/if}}
+    {{#if data.nextPage}}
+    <li class="page-item"><a class="page-link" href="{{data.nextLink}}">Siguiente</a></li>
+    {{/if}}
+  </ul>
+</nav>
+
+<div class="container">
+    <h1 class="text-center">Detalles del Carrito</h1>
+    <ul class="list-group">
+        {{#each productos}}
+        <li class="list-group-item">
+          <h2>{{this.product.title}}</h2>
+          <p>Descripción: {{this.product.description}}</p>
+          <p>Precio : ${{this.product.price}}</p>
+          <p>Cantidad: {{this.quantity}}</p>
+          <button onclick="eliminarDelCarrito('{{this.product.id}}', '{{../cid}}')" class="btn btn-danger">Eliminar del Carrito</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<script>
+function eliminarDelCarrito(productId, cid) {
+  fetch(`/api/carts/${cid}/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('No se pudo eliminar el producto del carrito');
+  })
+  .then(updatedCart => {
+    console.log('Producto eliminado del carrito', updatedCart);
+    // Actualizar la vista del carrito aquí o redirigir para refrescar la página
+  })
+  .catch(error => {
+    console.error('Error al eliminar el producto del carrito:', error);
+  });
+}
+</script>
