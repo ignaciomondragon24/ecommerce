@@ -86,16 +86,5 @@ router.delete('/:cid', async (req, res) => {
     res.status(404).send('Cart not found');
   }
 });
-// Ruta para visualizar un carrito específico
-// router.get('/:cid', async (req, res) => {
-//   const { cid } = req.params;
-//   try {
-//     const productosDelCarrito = await cartManager.getProductosDelCarrito(cid);
-//     //res.render('cart', { productos: productosDelCarrito });
-//     res.json(productosDelCarrito);
-//   } catch (error) {
-//     console.error('Error al obtener los productos del carrito:', error);
-//     res.status(500).send('Error interno del servidor');
-//   }
-// });
+
 module.exports = router;

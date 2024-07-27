@@ -87,4 +87,7 @@
 - **Descripción:** Actualiza la cantidad de un producto en un carrito específico.
 - **Parámetros de ruta:**
   - `cid`: ID del carrito.
-  - `
+  - `pid`: ID del producto.
+- **Cuerpo de la solicitud:**
+  ```json
+  
