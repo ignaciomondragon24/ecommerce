@@ -1,7 +1,8 @@
-// dao/mongoDb/cartManager.js
-const mongoose = require('mongoose');
-const Cart = require('../models/cartModel');
-const { ObjectId } = require('mongoose/lib/schema');
+import mongoose from 'mongoose';
+import Cart from '../models/cartModel.mjs';
+//import { ObjectId } from 'mongoose/lib/schema.mjs';
+
+// dao/mongoDb/cartManager.mjs
 
 class CartManager {
   async createCart() {
@@ -86,4 +87,4 @@ class CartManager {
   }
 }
 
-module.exports = CartManager;
+export default CartManager;

@@ -1,7 +1,7 @@
-// dao/models/productModel.js
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
+// dao/models/productModel.js
 const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true },
@@ -20,4 +20,4 @@ productSchema.plugin(mongoosePaginate);
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product;
+export default Product;

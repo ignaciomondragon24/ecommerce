@@ -1,5 +1,6 @@
-const handlebars = require("express-handlebars");
-const paths = require("../utils/paths.js");
+import handlebars from "express-handlebars";
+//import paths from "../utils/paths.mjs";
+import paths from "../utils/paths.mjs";
 
 const config = (app) => {
     app.engine("handlebars", handlebars.engine({
@@ -12,4 +13,5 @@ const config = (app) => {
     app.set("view engine", "handlebars");
 };
 
-module.exports = config;
+export default config;
+ 

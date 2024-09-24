@@ -1,5 +1,5 @@
-const { Server } = require("socket.io");
-const ProductManager = require("../dao/mongoDb/productManager");
+import { Server } from "socket.io";
+import ProductManager from "../dao/mongoDb/productManager.mjs";
 
 const productManager = new ProductManager();
 
@@ -29,6 +29,4 @@ const config = (serverHTTP) => {
     });
 };
 
-module.exports = { config };
-
-
+export { config };

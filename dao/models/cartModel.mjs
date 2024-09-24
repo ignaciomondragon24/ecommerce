@@ -1,5 +1,6 @@
-// dao/models/cartModel.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
+// dao/models/cartModel.mjs
 
 const cartSchema = new mongoose.Schema({
   products: [{
@@ -11,4 +12,4 @@ const cartSchema = new mongoose.Schema({
 
 const Cart = mongoose.model('Cart', cartSchema);
 
-module.exports = Cart;
+export default Cart;

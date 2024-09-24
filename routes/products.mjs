@@ -1,9 +1,10 @@
-// routes/products.js
-const express = require('express');
-const router = express.Router();
-const ProductManager = require('../dao/mongoDb/productManager');
-const CartManager = require('../dao/mongoDb/cartManager');
+import express from 'express';
+import ProductManager from '../dao/mongoDb/productManager.mjs';
+import CartManager from '../dao/mongoDb/cartManager.mjs';
 
+// routes/products.mjs
+
+const router = express.Router();
 const productManager = new ProductManager();
 const cartManager = new CartManager();
 
@@ -11,7 +12,7 @@ const cartManager = new CartManager();
 router.get('/list', async (req, res) => {
   let { query, sort, page = 1, limit = 10 } = req.query;
   try {
-    const products = await productManager.searchProducts(query, sort, page = parseInt(page), limit = parseInt(limit));
+    const products = await productManager.searchProducts(query, sort, parseInt(page), parseInt(limit));
     res.send(JSON.stringify({
       status: 'success',
       payload: products.docs,
@@ -38,7 +39,7 @@ router.get('/', async (req, res) => {
       const newCart = await cartManager.createCart();
       cid = newCart._id;
     }
-    const products = await productManager.searchProducts(query, sort, page = parseInt(page), limit = parseInt(limit));
+    const products = await productManager.searchProducts(query, sort, parseInt(page), parseInt(limit));
     const data = {
       status: 'success',
       payload: products.docs,
@@ -89,7 +90,6 @@ function getLink(page, limit, query, sort, endpoint = '/', cid) {
 
   return `http://localhost:8080/api/products${endpoint}?${paramsAsString}`;
 }
-
 
 // Ruta GET /:pid para obtener un producto por ID
 router.get('/:pid', async (req, res) => {
@@ -148,4 +148,4 @@ router.delete('/:pid', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,10 +1,10 @@
-// routes/carts.js
-const express = require('express');
+import express from 'express';
+import CartManager from '../dao/mongoDb/cartManager.mjs';
+
+// routes/carts.mjs
 const router = express.Router();
 router.use(express.json());
 
-
-const CartManager = require('../dao/mongoDb/cartManager');
 
 const cartManager = new CartManager();
 
@@ -87,4 +87,4 @@ router.delete('/:cid', async (req, res) => {
   }
 });
 
-module.exports = router; 
+export default router;

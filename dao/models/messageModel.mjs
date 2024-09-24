@@ -1,5 +1,6 @@
+import mongoose from 'mongoose';
+
 // dao/models/messageModel.js
-const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
   author: {
@@ -16,4 +17,4 @@ const messageSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 
-module.exports = Message;
+export default Message;

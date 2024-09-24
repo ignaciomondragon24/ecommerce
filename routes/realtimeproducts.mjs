@@ -1,8 +1,7 @@
+import express from 'express';
+import ProductManager from '../dao/mongoDb/productManager.mjs';
 
-const express = require('express');
 const router = express.Router();
-const ProductManager = require('../dao/mongoDb/productManager');
-
 const productManager = new ProductManager();
 
 router.get('/', async (req, res) => {
@@ -15,7 +14,7 @@ router.get('/', async (req, res) => {
             id: product._id
         }
     });
-    res.render('realTimeProducts', { products: mappedProducts } );
+    res.render('realTimeProducts', { products: mappedProducts });
 });
 
-module.exports = router;
+export default router;
