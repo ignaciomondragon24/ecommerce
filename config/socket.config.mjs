@@ -11,8 +11,13 @@ const config = (serverHTTP) => {
         console.log("Conexión establecida", id);
 
         socket.on("new_product_back", async (data) => {
-            const newProduct = await productManager.addProduct(title = data.title, price = data.price, description = data.description, stock = data.stock, category = data.category, code = data.code);
-            serverIO.emit("stock_actualizado", {});
+            try {
+                const { title, price, description, stock, category, code, thumbnails } = data;
+                const newProduct = await productManager.addProduct(title, price, description, stock, category, code, thumbnails);
+                serverIO.emit("stock_actualizado", {});
+            } catch (error) {
+                console.error("Error al agregar producto:", error);
+            }
         });
 
         socket.on("disconnect", () => {

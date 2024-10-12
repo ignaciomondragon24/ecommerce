@@ -1,43 +1,20 @@
-import express from 'express';
-import CartManager from '../dao/mongoDb/cartManager.mjs';
+import { Router } from "express";
+import Cart from "../dao/models/cartModel.mjs";
+import Product from "../dao/models/productModel.mjs";
+import { TicketModel } from "../dao/models/ticketModel.mjs";
+import { isUser } from "../middlewares/authmiddleware.mjs"; // Asegúrate de que el nombre del archivo coincida
+import passport from "passport";
+import { v4 as uuidv4 } from 'uuid';
 
-// routes/carts.mjs
-const router = express.Router();
-router.use(express.json());
+const router = Router();
 
-
-const cartManager = new CartManager();
-
-// Ruta raíz POST / para crear un nuevo carrito
-router.post('/', async (req, res) => {
-  const newCart = await cartManager.createCart();
-  res.status(201).json(newCart);
-});
-
-// Ruta GET /:cid para listar productos de un carrito
-router.get('/:cid', async (req, res) => {
-  const { cid } = req.params;
+// Ruta para agregar un producto a un carrito
+router.post('/:cid/products/:pid', async (req, res) => {
   try {
-    const productosDelCarrito = await cartManager.getProductosDelCarrito(cid);
-    if (productosDelCarrito) {
-      // console.log('productosDelCarrito:', productosDelCarrito);
-      res.render('cart', { productos: productosDelCarrito.products, cid: cid  });
-    } else {
-      res.status(404).send('Carrito no encontrado');
-    }
+    const updatedCart = await cartManager.addProductToCart(req.params.cid, req.params.pid);
+    res.status(200).json(updatedCart);
   } catch (error) {
-    console.error('Error al obtener los productos del carrito:', error);
-    res.status(500).send('Error interno del servidor');
-  }
-});
-
-// Ruta POST /:cid/product/:pid para agregar un producto a un carrito
-router.post('/:cid/product/:pid', async (req, res) => {
-  const updatedCart = await cartManager.addProductToCart(req.params.cid, req.params.pid);
-  if (updatedCart) {
-    res.json(updatedCart);
-  } else {
-    res.status(404).send('Cart or Product not found');
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -63,28 +40,40 @@ router.put('/:cid', async (req, res) => {
   }
 });
 
-// PUT api/carts/:cid/products/:pid
-router.put('/:cid/products/:pid', async (req, res) => {
-  const { cid, pid } = req.params;
-  const quantity = req.body.quantity;
-  
-  const updatedCart = await cartManager.updateProductQuantity(cid, pid, quantity);
-  if (updatedCart) {
-    res.json(updatedCart);
-  } else { 
-    res.status(404).send('Cart or Product not found');
-  }
-});
-
-// DELETE api/carts/:cid
-router.delete('/:cid', async (req, res) => {
+// Ruta POST /:cid/purchase para realizar una compra
+router.post('/:cid/purchase', passport.authenticate('jwt', { session: false }), isUser, async (req, res) => {
   const { cid } = req.params;
-  const success = await cartManager.deleteCart(cid);
-  if (success) {
-    res.status(204).send();
-  } else {
-    res.status(404).send('Cart not found');
+  const cart = await Cart.findById(cid).populate('products.product');
+  if (!cart) {
+    return res.status(404).json({ message: 'Carrito no encontrado' });
   }
+
+  let totalAmount = 0;
+  const productsNotPurchased = [];
+
+  for (const item of cart.products) {
+    const product = item.product;
+    if (product.stock >= item.quantity) {
+      product.stock -= item.quantity;
+      totalAmount += product.price * item.quantity;
+      await product.save();
+    } else {
+      productsNotPurchased.push(product._id);
+    }
+  }
+
+  const ticket = new TicketModel({
+    code: uuidv4(),
+    amount: totalAmount,
+    purchaser: req.user.email
+  });
+
+  await ticket.save();
+
+  cart.products = cart.products.filter(item => productsNotPurchased.includes(item.product._id));
+  await cart.save();
+
+  res.json({ ticket, productsNotPurchased });
 });
 
 export default router;
